@@ -733,7 +733,7 @@ namespace GitTfs.VsCommon
 
         private Workspace GetWorkspace(params WorkingFolder[] folders)
         {
-            var workspace = VersionControl.CreateWorkspace(GenerateWorkspaceName());
+            var workspace = VersionControl.CreateWorkspace(new CreateWorkspaceParameters(GenerateWorkspaceName()) { Location = Microsoft.TeamFoundation.VersionControl.Common.WorkspaceLocation.Server });
             try
             {
                 SetWorkspaceMappingFolders(workspace, folders);
