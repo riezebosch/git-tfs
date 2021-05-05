@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Reflection;
 using System.Runtime.InteropServices;
 
@@ -195,6 +196,7 @@ namespace GitTfs.VsCommon
 
         protected override TfsTeamProjectCollection GetTfsCredential(Uri uri)
         {
+            return new TfsTeamProjectCollection(uri, new VssCredentials(new VssBasicCredential(new NetworkCredential("", Password))));
             var vssCred = HasCredentials
                 ? new VssClientCredentials(new WindowsCredential(GetCredential()))
                 : VssClientCredentials.LoadCachedCredentials(uri, false, CredentialPromptType.PromptIfNeeded);
